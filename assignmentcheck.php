@@ -31,7 +31,7 @@ session_start();
 <html>
 <head>
     <title>lessons</title>
-    <link rel="stylesheet" type="text/css" href="styler.css">
+    <link rel="stylesheet" type="text/css" href="stylerazred.css">
 </head>
 <body>
     <div>

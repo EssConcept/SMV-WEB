@@ -1,0 +1,75 @@
+* {
+    font-family: Arial, Helvetica, sans-serif;
+  }
+  .heading{
+  text-align: center;
+  padding-bottom: 20px;
+  font-size: 20pt;
+  }
+       
+  ul.navbar {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  background-color: #fff;
+  overflow: hidden;
+  display: flex; 
+  justify-content: center; 
+  font-size: larger;
+  }
+  li.nav-item a {
+  display: block;
+  color: #000;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  }
+  
+  li.nav-item a:hover {
+  background-color: #f2f2f2;
+  color: black;
+  }
+  .container {
+    width: 80%;
+    margin: 20px auto;
+    text-align: center;
+  }
+  
+  .grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 10px;
+    text-align: center;
+  }
+  
+  .vnos-ocene {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    border: 1px solid hsl(0, 0%, 87%);
+    background-color: #ffff;
+  }
+  
+  .vnos-ocene.naslovnica {
+    font-weight: bold;
+    background-color: #f2f2f2;
+  }
+  
+  .vnos-ocene:hover {
+    background-color: #f2f2f2;
+  }
+  
+  .vnos {
+    flex: 1;
+  }
+  
+  .container h1 {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+  }
+  
+  .test {
+    text-decoration: none;
+    color: black;
+  }
+  

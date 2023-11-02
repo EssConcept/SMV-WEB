@@ -13,7 +13,7 @@ session_start();
 <!DOCTYPE html>
 <html>
 <head>
-    <link rel="stylesheet" type="text/css" href="styler.css">
+    <link rel="stylesheet" type="text/css" href="stylerazred.css">
 </head>
 <body>
     <div class='vnos-ocene naslovnica'>
