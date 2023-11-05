@@ -68,12 +68,38 @@ session_start();
 <html>
 <head>
     <title>lessons</title>
-    <link rel="stylesheet" type="text/css" href="styler.css">
+    <link rel="stylesheet" type="text/css" href="styleassignment.css">
 </head>
 <body>
-    <div>
-        <?php
+<header class="header-outer">
+        <div class="header-inner responsive-wrapper">
+            <div class="header-logo">
+                <img src="profilepictures/ClassIQ.png" />
+            </div>
+            <?php
 
+$user_id = $user_data['user_id'];
+$img_query = "SELECT profile_picture_location FROM users WHERE user_id=$user_id";
+$result = mysqli_query($con, $img_query);
+if(mysqli_num_rows($result) > 0){
+    while($row = mysqli_fetch_assoc($result)){
+        $img_src = $row['profile_picture_location'];
+        echo "<div class='profilepic'><img src='$img_src' alt=''></div>";
+    }
+}
+
+?>
+            <nav class="header-navigation">
+            <p>ClassIQ</p>
+                <a href="profil.php">Profil</a>
+                <a href="contacts.php">Kontakt</a>
+                <a href='domacastran.php'>Dom</a>               
+        </div>  
+    </header>
+    <div>
+
+        <?php
+       
         $assignment_id = $_GET['assignment_id'];
         $lesson_id = $_GET['lesson_id'];
         $query = "SELECT * FROM assignment WHERE assignment_id = '$assignment_id'";
@@ -86,12 +112,12 @@ session_start();
                     $assignment_name = $row['assignment_name'];
                     $assignment_desc = $row['assignment_desc'];
                     $due_date = $row['due_date'];
-
-                    echo "
-                    <div>$assignment_name</div>
-                    <div>$assignment_desc</div>
-                    <div>$due_date</div>
-                    ";
+                    echo "<div class='grid'>
+                    <div class='vnos-ocene naslovnica'>
+                        <div class='vnos'>Priimek, Ime</div>
+                        <div class='vnos'>Datum Oddaje</div>
+                        <div class='vnos'>Ogled in ocenjevanje</div>
+                    </div>"; 
 
                     $inner_query = "SELECT * FROM assignment_submissions WHERE assignment_id = '$assignment_id'";
                     $inner_result = mysqli_query($con, $inner_query);
@@ -125,8 +151,8 @@ session_start();
                     
 
                     
-                    echo "<br><br><a href='deleteassignment.php?assignment_id=$assignment_id&lesson_id=$lesson_id'>Izbriši dodelitev</a>";
-                    echo "<br><a href='lesson.php?lesson_id=$lesson_id'>Nazaj</a>";
+                    echo "<br><br><div id = 'div'><a href='deleteassignment.php?assignment_id=$assignment_id&lesson_id=$lesson_id' id= 'nvm'>Izbriši dodelitev</a></div>";
+                    echo "<br><div id = 'div'><a href='lesson.php?lesson_id=$lesson_id' id= 'nvm'>Nazaj</a></div>";
                 }
             }
         }
@@ -140,22 +166,25 @@ session_start();
                     $due_date_time = new DateTime($due_date);
                     $current_date = new DateTime();
 
-                    echo "
-                    <div>$assignment_name</div>
-                    <div>$assignment_desc</div>
-                    <div>$due_date</div>
-                    ";
                     if($current_date < $due_date_time){
                     echo "
-                    <form method='POST' enctype='multipart/form-data'>
-                        <label for='upload_file'>Naloži rešitev:</label>
-                        <input type='file' name='upload_file' id='upload_file' required><br><br>
-                        <input type='submit' value='Submit'>
+                        <div class='container'>
+                        <h1>Oddaja Naloge</h1>
+                        <div><b>IME NALOGE:</b> $assignment_name</div>
+                        <div><b>OPIS NALOGE:</b> $assignment_desc</div>
+                        <div><b>ROK ODDAJE:</b> $due_date</div><br>
+                        <form method='POST' enctype='multipart/form-data'>
+                            <div class='form-group'>
+                                <label for='upload_file'>Nalozi datoteko:</label>
+                                <input type='file' name='upload_file' id='upload_file' required>
+                            </div>
+                            <div class='button'><button type='submit' name='content' value='Submit'>Oddaj</button></div>
+                            <a href='lesson.php?lesson_id=$lesson_id' class='btn-link'>Nazaj</a>
                     </form>
                     ";   
                     }
                                          
-                    echo "<br><a href='lesson.php?lesson_id=$lesson_id'>Nazaj</a>";
+                
                 }
             }
         }

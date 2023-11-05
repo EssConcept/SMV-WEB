@@ -77,24 +77,55 @@ session_start();
 <html>
 <head>
     <title>create material</title>
+    <link rel="stylesheet" href="stylecreatematerial.css">
 </head>
 <body>
-    <form method="POST" enctype="multipart/form-data">
-        <label for="material_name">Ime gradiva:</label>
-        <input type="text" name="material_name" id="material_name" required><br><br>
+<header class="header-outer">
+        <div class="header-inner responsive-wrapper">
+            <div class="header-logo">
+                <img src="profilepictures/ClassIQ.png" />
+            </div>
+            <?php
 
-        <label for="upload_file">Naloži gradivo:</label>
-        <input type="file" name="upload_file" id="upload_file" required><br><br>
+$user_id = $user_data['user_id'];
+$img_query = "SELECT profile_picture_location FROM users WHERE user_id=$user_id";
+$result = mysqli_query($con, $img_query);
+if(mysqli_num_rows($result) > 0){
+    while($row = mysqli_fetch_assoc($result)){
+        $img_src = $row['profile_picture_location'];
+        echo "<div class='profilepic'><img src='$img_src' alt=''></div>";
+    }
+}
 
-        <input type="submit" value="Submit">
-    </form>
-    <?php
+?>
+            <nav class="header-navigation">
+            <p>ClassIQ</p>
+                <a href="profil.php">Profil</a>
+                <a href="contacts.php">Kontakt</a>
+                <a href='domacastran.php'>Dom</a>              
+        </div>  
+    </header>
+    <div class="container">
+        <h1>Novo Gradivo</h1>
+        <form method="POST" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="material_name">Ime gradiva:</label>
+                <input type="text" id="material_name" name="material_name" required>
+            </div>
+            <div class="form-group">
+                <label for="upload_file">Naloži gradivo:</label>
+                <input type="file" id="upload_file" name="upload_file" required>
+            </div>
+            <button type="submit">Nadaljuj</button><br>
+            <?php
 
         if(isset($_GET["lesson_id"])){
         $lesson_id = $_GET["lesson_id"];
-        echo"<a href='lesson.php?lesson_id=$lesson_id'>Nazaj</a>";
+        echo"<a href='lesson.php?lesson_id=$lesson_id' id = 'nazj'>Nazaj</a>";
         } 
 
     ?>
+        </form>
+    
 </body>
 </html>

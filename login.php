@@ -8,13 +8,13 @@ session_start();
 	if ($_SERVER['REQUEST_METHOD'] == "POST") 
 	{
 
-		//Grabs data from form
+	
 		$username = $_POST['username'];
 		$password = $_POST['password'];
 
 		if (!empty($username) && !empty($password)) {
 
-			//Logs in the user
+		
 			$query = "SELECT * FROM users WHERE username = '$username' LIMIT 1";
 			$result = mysqli_query($con, $query);
 
@@ -51,25 +51,28 @@ session_start();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="stylel.css">
+    <link rel="stylesheet" href="stylelogin.css">
 </head>
 <body>
-    <div class="heading">
-        Elektronski portal - MajMun
+<div class="header">
+	<div class="lamal"> <div class="lamal2">ClassIQ</div><br><img src="profilepictures/ClassIQ.png" alt="ClassIQ Logo"></div>
+        
     </div>
     <div class="login-box">
         <h2>Prijava</h2>
         <form method="POST">
           <div class="user-box">
-            <input type="text" name="username" required>
-            <label>Uporabnisko ime</label>
+            <input type="text" name="username" required placeholder="Uporabnisko Ime">
           </div>
           <div class="user-box">
-            <input type="password" name="password" required>
-            <label>Geslo</label>
+            <input type="password" name="password" required placeholder="Geslo">
           </div>
-          <input type="submit">
+          <input type="submit" value = 'Nadaljuj'>
         </form>
       </div>
+	  <footer class="footer">
+        <p>ClassIQ Spletna Ucilnica</p>
+        <p>&copy; ClassIQ 2023</p>
+    </footer>
 </body>
 </html>

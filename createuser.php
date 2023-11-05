@@ -2,11 +2,11 @@
 
 session_start();
 	
-	//Check if user is loged in
+	
 	include("connection.php");
 	include("functions.php");
 
-    //Check if user is admin
+  
 	$user_data = check_login($con);
     if($user_data['username'] != 'Admin'){
         if (isset($_SESSION['user_id'])) {
@@ -158,13 +158,15 @@ session_start();
                     <option value="E1a">E1a</option>
                     <option value="E1b">E1b</option>
                     <option value="K1a">K1a</option>
-                    <option value="empty">Učitej</option>
+                    <option value="empty">Profesor</option>
                 </select>
             </div>
             <button type="submit">Ustvari</button>
-            <br></br><br></br>
+            <br></br><br>
+            <a href="profil.php" class="btn-link">Nazaj</a>
+<a href="administration.php" class="btn-link">Spremeni obstojecega uporabnika</a>
         </form>
-        <a href="administration.php">Nazaj</a>
+       
     </div>
 </body>
 </html>

@@ -31,12 +31,42 @@ session_start();
 <html>
 <head>
     <title>lessons</title>
-    <link rel="stylesheet" type="text/css" href="styler.css">
+    <link rel="stylesheet" type="text/css" href="styleasscheck.css">
 </head>
 <body>
-    <div>
+<header class="header-outer">
+        <div class="header-inner responsive-wrapper">
+            <div class="header-logo">
+                <img src="profilepictures/ClassIQ.png" />
+            </div>
+            <?php
+
+$user_id = $user_data['user_id'];
+$img_query = "SELECT profile_picture_location FROM users WHERE user_id=$user_id";
+$result = mysqli_query($con, $img_query);
+if(mysqli_num_rows($result) > 0){
+    while($row = mysqli_fetch_assoc($result)){
+        $img_src = $row['profile_picture_location'];
+        echo "<div class='profilepic'><img src='$img_src' alt=''></div>";
+    }
+}
+
+?>
+            <nav class="header-navigation">
+            <p>ClassIQ</p>
+                <a href="profil.php">Profil</a>
+                <a href="contacts.php">Kontakt</a>
+                <a href='domacastran.php'>Dom</a>               
+        </div>  
+    </header>
+    <div class="grid">
+    <div class='vnos-ocene naslovnica'>
+            <div class='vnos'>Priimek, Ime</div>
+            <div class='vnos'>Datum Oddaje</div>
+            <div class='vnos'>Prenesi Datoteko</div>
+            <div class='vnos'>Ocena</div>
+        </div>
         <?php
-        
         $lesson_id = $_GET["lesson_id"];
         $assignment_id = $_GET['assignment_id'];
         $student_id = $_GET['student_id'];
@@ -50,7 +80,7 @@ session_start();
                 $surname = $row['surname'];
 
                 echo "
-                <div>$surname $name</div>";
+                ";
                 
             }
         }
@@ -63,18 +93,21 @@ session_start();
                 $submission_date = $row['submission_date'];
                 $content_path = $row['content'];
                 
-                echo "<div><a href='$content_path' download>Prenesi datoteko</a>$submission_date</div>";
                 echo "
-                <br><div>
-                    <form method='POST'>
-                        <label for='grade'>Ocena:</label>
-                        <input type='number' id='grade' name='grade' min='1' max='5' required>
-                        <input type='submit' value='Submit'>
-                    </form>
-                </div>";
+                <div class='vnos-ocene'>
+                <div class='vnos'>$surname $name</div>
+                                    <div class='vnos'>$submission_date</div>
+                                    <a href='$content_path' class='vnos'>Prenesi datoteko</a>
+                                    <div class='vnos'><form method='POST'>
+                                    <label for='grade'>Ocena:</label>
+                                    <input type='number' id='grade' name='grade' min='1' max='5' required>
+                                    <input type='submit' value='Submit'>
+                                </form></div>
+                                </div>";
+              
             }
         }
-        echo "<br><a href='assignment.php?assignment_id=$assignment_id&lesson_id=$lesson_id'>Nazaj</a>";
+        echo "<br><div id='div'><a href='assignment.php?assignment_id=$assignment_id&lesson_id=$lesson_id' id='nvm'>Nazaj</a></div>";
         ?>
     </div>
 </body>

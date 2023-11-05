@@ -13,20 +13,28 @@ session_start();
 <!DOCTYPE html>
 <html>
 <head>
-    <link rel="stylesheet" type="text/css" href="styler.css">
+    <link rel="stylesheet" type="text/css" href="styledomacastran.css">
 </head>
 <body>
-    <ul class="navbar">
-
-        <li class="nav-item"><a href="profil.php">Profil</a></li>
-        
-        <?php
+<header class="header-outer">
+        <div class="header-inner responsive-wrapper">
+            <div class="header-logo">
+                <img src="profilepictures/ClassIQ.png" />
+            </div>
+            <div class="profilepic">
+                <img src="profilepictures/me.png" alt="">
+            </div>
+            <nav class="header-navigation">
+            <p>ClassIQ</p>
+                <a href="profil.php">Profil</a>
+                <a href="contacts.php">Kontakti</a>
+                <?php
             if($user_data['role'] == 'student'){
-                echo "<li class='nav-item'><a href='ocene.php'>Ocene</a></li>";
+                echo "<a href='ocene.php'>Ocene</a>";
             }
-        ?>
-        <li class="nav-item"><a href="contacts.php">Kontakti</a></li>
-    </ul>
+        ?>                
+        </div>  
+    </header>
 
     <div class="container">
         <h1>Predogled Predmetov</h1>
@@ -74,14 +82,14 @@ session_start();
                         }                          
                     }
                 }
-                echo "<div><a href='createlesson.php'>Ustvari razred</a></div>";
+
             }
             else if($role == 'student'){
 
                 echo "
                 <div class='vnos-ocene naslovnica'>
                     <div class='vnos'>Ime predmeta</div>
-                    <div class='vnos'>Učitelj / ica</div>
+                    <div class='vnos'>Profesor / ica</div>
                     <div class='vnos'>Ogled Predmeta</div>
                 </div>";
 

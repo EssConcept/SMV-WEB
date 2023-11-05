@@ -2,7 +2,7 @@
 
 session_start();
 	
-	//Check if user is loged in
+	
 	include("connection.php");
 	include("functions.php");
 
@@ -26,15 +26,39 @@ session_start();
 <html>
 <head>
     <title>PHP Button Display</title>
-    <link rel="stylesheet" type="text/css" href="styler.css">
+    <link rel="stylesheet" type="text/css" href="styleadministration.css">
 </head>
 <body>
-    <a href="profil.php">Nazaj na profil</a>
+<header class="header-outer">
+        <div class="header-inner responsive-wrapper">
+            <div class="header-logo">
+                <img src="profilepictures/ClassIQ.png" />
+            </div>
+            <?php
+
+$user_id = $user_data['user_id'];
+$img_query = "SELECT profile_picture_location FROM users WHERE user_id=$user_id";
+$result = mysqli_query($con, $img_query);
+if(mysqli_num_rows($result) > 0){
+    while($row = mysqli_fetch_assoc($result)){
+        $img_src = $row['profile_picture_location'];
+        echo "<div class='profilepic'><img src='$img_src' alt=''></div>";
+    }
+}
+
+?>
+            <nav class="header-navigation">
+            <p>ClassIQ</p>
+                <a href="profil.php">Profil</a>
+                <a href="createuser.php">Nazaj</a>           
+        </div>  
+    </header>
     <form method="post" id="content_form">
         <button type="submit" name="content" value="users">Uporabniki</button>
         <button type="submit" name="content" value="classes">Razredi</button>
         <button type="submit" name="content" value="subjects">Predmeti</button>
-        <button type="submit" name="content" value="teachers">Učitelji</button>
+        <button type="submit" name="content" value="teachers">Profesorji</button>
+        <button type="submit" name="content" value="lessons">Dodelitev predmetov</button>
     </form>
 
     <div id="displayArea">
@@ -82,7 +106,7 @@ session_start();
                         </div>";
                     }
                 }
-                echo "<a href='createuser.php'>Ustvari novega uporabnika</a>";
+                echo "<a href='createuser.php' id = 'ustvari'>Ustvari novega uporabnika</a>";
 
             }
             elseif ($content === 'classes') {
@@ -110,10 +134,10 @@ session_start();
                 }
                 echo "
                 <form method='POST'>
-                    <label for='class_name'>Ime razreda:</label>
+                    <label for='class_name'>Nov razred:</label>
                     <input type='text' name='class_name' id='class_name' required>
 
-                    <input type='submit'>
+                    <input type='submit' value = 'Nadaljuj'>
                 </form>
                 ";
 
@@ -144,10 +168,10 @@ session_start();
 
                 echo "
                 <form method='POST'>
-                    <label for='subject_name'>Ime predmeta:</label>
+                    <label for='subject_name'>Nov predmet:</label>
                     <input type='text' name='subject_name' id='subject_name' required>
 
-                    <input type='submit'>
+                    <input type='submit' value = 'Nadaljuj'>
                 </form>
                 ";
 
@@ -155,7 +179,7 @@ session_start();
             elseif ($content === 'teachers') {
                 echo "
                 <div class='vnos-ocene naslovnica'>
-                    <div class='vnos'>Učitelj / ica</div>
+                    <div class='vnos'>Profesor / ica</div>
                     <div class='vnos'>Ime predmeta</div>
                     <div class='vnos'>Izbris</div>
                 </div>";
@@ -192,11 +216,55 @@ session_start();
                         }
                     }
                 }
-                echo "<a href='subject_assigning.php'>Dodaj učitelja k predmetu</a>";
+                echo "<a href='subject_assigning.php' id = 'linked'>Dodaj profesorja k predmetu</a>";
 
             }
-            else{
-                //DODAJ NEK TEXT CE HOCES DA JE KAJ DISPLAYAN MEDTEM KO NIMAS NC ZBRAN
+            elseif($content === 'lessons'){
+                echo "
+                <div class='vnos-ocene naslovnica'>
+                    <div class='vnos'>Lesson_id</div>
+                    <div class='vnos'>Ime razreda</div>
+                    <div class='vnos'>Ime lekcije</div>
+                    <div class='vnos'>Ime profesorja</div>
+                    <div class='vnos'>Izbris</div>
+                </div>";
+                $query = "SELECT * FROM lessons";
+                $result = mysqli_query($con, $query);
+                if(mysqli_num_rows($result) > 0){
+                    while($row = mysqli_fetch_assoc($result)){
+                        $lesson_id = $row['lesson_id'];
+                        $class_id = $row['class_id'];
+                        $lesson_name = $row['lesson_name'];
+                        $teacher_id = $row['teacher_id'];
+
+                        $inner_query = "SELECT class_name FROM classes WHERE class_id = '$class_id'";
+                        $inner_result = mysqli_query($con, $inner_query);
+                        if(mysqli_num_rows($inner_result) > 0){
+                            while($inner_row = mysqli_fetch_assoc($inner_result)){
+                                $class_name = $inner_row['class_name'];
+
+                                $inner_query_two = "SELECT * FROM users WHERE user_id = '$teacher_id'";
+                                $inner_result_two = mysqli_query($con, $inner_query_two);
+                                if(mysqli_num_rows($inner_result_two) > 0){
+                                    while($inner_row_two = mysqli_fetch_assoc($inner_result_two)){
+                                        $teacher_name = $inner_row_two['name'];
+                                        $teacher_surname = $inner_row_two['surname'];
+                                        
+                                        echo "
+                                        <div class='vnos-ocene'>
+                                            <div class='vnos'>$lesson_id</div>
+                                            <div class='vnos'>$class_name</div>
+                                            <div class='vnos'>$lesson_name</div>
+                                            <div class='vnos'>$teacher_name $teacher_surname</div>
+                                            <a href='lesson_delete.php?lesson_id=$lesson_id'>Izbriši</a>
+                                        </div>";
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                echo "<a href='createlesson.php' id = 'ustvari2'>Ustvari lekcijo</a>";
             }
         }
         ?>

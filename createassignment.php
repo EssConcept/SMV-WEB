@@ -33,30 +33,64 @@ session_start();
 <html>
 <head>
     <title>create assignment</title>
+    <link rel="stylesheet" href="stylecreateass.css">
 </head>
 <body>
-    <form method="POST">
-        <label for="assignment_name">Ime dodelitve:</label>
-        <input type="text" name="assignment_name" id="assignment_name" required><br><br>
+<header class="header-outer">
+        <div class="header-inner responsive-wrapper">
+            <div class="header-logo">
+                <img src="profilepictures/ClassIQ.png" />
+            </div>
+            <?php
 
-        <label for="assignment_desc">Opis dodelitve:</label>
-        <input type="text" name="assignment_desc" id="assignment_desc" required><br><br>
+$user_id = $user_data['user_id'];
+$img_query = "SELECT profile_picture_location FROM users WHERE user_id=$user_id";
+$result = mysqli_query($con, $img_query);
+if(mysqli_num_rows($result) > 0){
+    while($row = mysqli_fetch_assoc($result)){
+        $img_src = $row['profile_picture_location'];
+        echo "<div class='profilepic'><img src='$img_src' alt=''></div>";
+    }
+}
 
-        <label for="date">Izberi datum:</label>
-        <input type="date" id="date" name="date" required><br><br>
+?>
+            <nav class="header-navigation">
+            <p>ClassIQ</p>
+                <a href="profil.php">Profil</a>
+                <a href="contacts.php">Kontakt</a>
+                <a href='domacastran.php'>Dom</a>              
+        </div>  
+    </header>
+    <div class="container">
+        <h1>Nova Naloga</h1>
+        <form method="POST" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="assignment_name">Ime naloge:</label>
+                <input type="text" id="assignment_name" name="assignment_name" required>
+            </div>
+            <div class="form-group">
+                <label for="assignment_desc">Opis naloge:</label>
+                <input type="text" id="assignment_desc" name="assignment_desc" required>
+            </div>
+            <div class="form-group">
+                <label for="date">Izberi datum:</label>
+                <input type="date" id="date" name="date" required>
+            </div>
+            <div class="form-group">
+                <label for="time">Izberi čas:</label>
+                <input type="time" id="time" name="time" required>
+            </div>
+            <button type="submit">Nadaljuj</button>
+        </form>
+        <?php
 
-        <label for="time">Izberi čas:</label>
-        <input type="time" id="time" name="time" required><br><br>
+if(isset($_GET["lesson_id"])){
+$lesson_id = $_GET["lesson_id"];
+echo"<a href='lesson.php?lesson_id=$lesson_id' id = 'nazj'>Nazaj</a>";
+} 
 
-        <input type="submit" value="Submit">
-    </form>
-    <?php
-
-        if(isset($_GET["lesson_id"])){
-        $lesson_id = $_GET["lesson_id"];
-        echo"<a href='lesson.php?lesson_id=$lesson_id'>Nazaj</a>";
-        } 
-
-    ?>
+?>
+    </div>
+    
 </body>
 </html>

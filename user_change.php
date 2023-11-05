@@ -83,10 +83,10 @@ session_start();
 <html>
 <head>
     <title>PHP Button Display</title>
-    <link rel="stylesheet" type="text/css" href="styler.css">
+    <link rel="stylesheet" type="text/css" href="styleuserchange.css">
 </head>
 <body>
-    <div id="displayArea">
+    <div class="container">
         <?php
         if (isset($_GET['user_id'])) {
             $user_id = $_GET['user_id'];
@@ -107,6 +107,7 @@ session_start();
 
                     echo "
                     <form method='POST'>
+                    <h1>Spremeni Uporabnika</h1>
                         <div class='form-group'> 
                             <label for='user_id'>user_id:</label>
                             <input type='text' id='user_id' name='user_id' value='$user_id_old' readonly>
@@ -172,7 +173,7 @@ session_start();
                 }
             }
         }
-        echo "<a href='administration.php'>Nazaj</a>";
+        echo "<a href='administration.php' class='btn-link'>Nazaj</a>";
         ?>
     </div>
 </body>
