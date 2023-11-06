@@ -101,7 +101,7 @@ if(mysqli_num_rows($result) > 0){
                                     <div class='vnos'><form method='POST'>
                                     <label for='grade'>Ocena:</label>
                                     <input type='number' id='grade' name='grade' min='1' max='5' required>
-                                    <input type='submit' value='Submit'>
+                                     <button type='submit'>Potrdi</button>
                                 </form></div>
                                 </div>";
               

@@ -37,8 +37,14 @@ if(mysqli_num_rows($result) > 0){
             <nav class="header-navigation">
             <p>ClassIQ</p>
                 <a href="profil.php">Profil</a>
-                <a href="domacastran.php">Dom</a>
+               
                 <?php
+                 if($user_data['role'] == 'teacher'){
+                    echo "<a href='domacastran.php'>Dom</a>";
+                }
+                if($user_data['role'] == 'student'){
+                    echo "<a href='domacastran.php'>Dom</a>";
+                }
             if($user_data['role'] == 'student'){
                 echo "<a href='ocene.php'>Ocene</a>";
             }

@@ -101,8 +101,8 @@ if(mysqli_num_rows($result) > 0){
                             <div class='vnos'>$email</div>
                             <div class='vnos'>$role</div>
                             <div class='vnos'>$class_id</div>
-                            <a href='user_change.php?user_id=$user_id'>Spremeni</a>
-                            <a href='user_delete.php?user_id=$user_id'>Izbriši</a>
+                            <a href='user_change.php?user_id=$user_id' id = 'nzm'>Spremeni</a>
+                            <a href='user_delete.php?user_id=$user_id' id = 'nzm'>Izbriši</a>
                         </div>";
                     }
                 }
@@ -128,7 +128,7 @@ if(mysqli_num_rows($result) > 0){
                         <div class='vnos-ocene'>
                             <div class='vnos'>$class_id</div>
                             <div class='vnos'>$class_name</div>
-                            <a href='class_delete.php?class_id=$class_id'>Izbriši</a>
+                            <a href='class_delete.php?class_id=$class_id' id = 'nzm'>Izbriši</a>
                         </div>";
                     }
                 }
@@ -161,7 +161,7 @@ if(mysqli_num_rows($result) > 0){
                         <div class='vnos-ocene'>
                             <div class='vnos'>$subject_id</div>
                             <div class='vnos'>$subject_name</div>
-                            <a href='subject_delete.php?subject_id=$subject_id'>Izbriši</a>
+                            <a href='subject_delete.php?subject_id=$subject_id' id = 'nzm'>Izbriši</a>
                         </div>";
                     }
                 }
@@ -208,7 +208,7 @@ if(mysqli_num_rows($result) > 0){
                                         <div class='vnos-ocene'>
                                             <div class='vnos'>$name $surname</div>
                                             <div class='vnos'>$subject_name</div>
-                                            <a href='teaches_delete.php?subject_id=$subject_id&teacher_id=$teacher_id'>Izbriši</a>
+                                            <a href='teaches_delete.php?subject_id=$subject_id&teacher_id=$teacher_id' id = 'nzm'>Izbriši</a>
                                         </div>";
                                     }
                                 }
@@ -256,7 +256,7 @@ if(mysqli_num_rows($result) > 0){
                                             <div class='vnos'>$class_name</div>
                                             <div class='vnos'>$lesson_name</div>
                                             <div class='vnos'>$teacher_name $teacher_surname</div>
-                                            <a href='lesson_delete.php?lesson_id=$lesson_id'>Izbriši</a>
+                                            <a href='lesson_delete.php?lesson_id=$lesson_id' id = 'nzm'>Izbriši</a>
                                         </div>";
                                     }
                                 }
